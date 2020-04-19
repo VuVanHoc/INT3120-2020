@@ -30,7 +30,7 @@ export default class CategoriesScreen extends React.Component {
 
     this.state = {
       isLoading: true,
-      categoryList: []
+      categoryList: [],
     };
   }
 
@@ -52,8 +52,8 @@ export default class CategoriesScreen extends React.Component {
     let data = [];
     let allCities = categoryRef
       .get()
-      .then(snapshot => {
-        snapshot.forEach(doc => {
+      .then((snapshot) => {
+        snapshot.forEach((doc) => {
           // console.log(doc.id, "=>", doc.data());
           data.push(doc.data());
           // console.log(data);
@@ -61,7 +61,7 @@ export default class CategoriesScreen extends React.Component {
 
         this.setState({ categoryList: data, isLoading: !this.state.isLoading });
       })
-      .catch(err => {
+      .catch((err) => {
         console.log("Error getting documents", err);
       });
   }
@@ -74,7 +74,7 @@ export default class CategoriesScreen extends React.Component {
       headerTitleAlign: "center",
       headerTransparent: true,
       headerTitleContainerStyle: { marginHorizontal: 20, marginTop: 20 },
-      headerTitle: props => (
+      headerTitle: (props) => (
         <View style={StyleHomeScreen.StyleHeader.headerTitle}>
           <LogoTitle {...props} />
         </View>
@@ -104,7 +104,7 @@ export default class CategoriesScreen extends React.Component {
             />
           </TouchableOpacity>
         );
-      }
+      },
     });
 
     return (
@@ -126,7 +126,7 @@ export default class CategoriesScreen extends React.Component {
                 pressed={() =>
                   navigation.push("Category", {
                     categoryTitle: item.title,
-                    categoryId: item.title
+                    categoryId: item.title,
                   })
                 }
               ></CategoryItem>
