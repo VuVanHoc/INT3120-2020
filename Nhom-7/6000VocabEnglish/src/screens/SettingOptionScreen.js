@@ -41,9 +41,22 @@ export default class SettingOptionScreen extends React.Component {
     headerTintColor: GLOBAL.COLOR.ORANGE
   };
 
-  
+  _onPressSetting = (item) => {
+    switch(item.id){
+      case 1:
+        this.props.navigation.navigate("SettingScreen");
+        break;
+      case 2:
+      case 3:
+      case 4:
+      case 5:
+      case 6:
+      default:
+        break;
+    }
+    
+  };
   render() {
-    const { navigation } = this.props;
     const { settingList } = this.state;
     return (
       <View>
@@ -53,12 +66,12 @@ export default class SettingOptionScreen extends React.Component {
         />
         <FlatList
           data={settingList}
+          keyExtractor={(item) => item.id}
           renderItem={({ item }) => 
             <SettingItem 
               setting={item} 
-              onPress={() => navigation.navigate('SettingScreen')}/>
+              onPress={this._onPressSetting(item)}/>
           }
-          keyExtractor={(item) => item.id}
           contentContainerStyle={styles.container}
         ></FlatList>
       </View>
