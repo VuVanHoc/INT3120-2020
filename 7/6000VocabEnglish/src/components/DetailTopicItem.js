@@ -90,37 +90,39 @@ export class DetailTopicItem extends Component {
   render() {
     const { word, spelling, meaning, image } = this.props.item;
     return (
-      <View style={styles.container}>
-        <View style={styles.leftColumn}>
-          <View style={styles.iconStar}>
+      <TouchableOpacity style={styles.container} onPress={() => {this.props.gotoSlide}}>
+        {/* <View style={styles.container}> */}
+          <View style={styles.leftColumn}>
+            <View style={styles.iconStar}>
+              <TouchableOpacity
+                onPress={() => this.handlePressFavorite(this.props.item)}
+              >
+                <Image
+                  source={!this.state.favorite ? starOutline : starFillColor}
+                  style={{ width: 25, height: 25 }}
+                />
+              </TouchableOpacity>
+            </View>
+            <View>
+              <Image style={styles.mainImage} source={{ uri: image }} />
+            </View>
+          </View>
+          <View style={styles.rightColumn}>
+            <Text style={styles.word}>{word}</Text>
+            <Text style={styles.spelling}>{spelling}</Text>
             <TouchableOpacity
-              onPress={() => this.handlePressFavorite(this.props.item)}
+              style={styles.iconSpeaker}
+              onPress={this.props.playSound}
             >
               <Image
-                source={!this.state.favorite ? starOutline : starFillColor}
-                style={{ width: 25, height: 25 }}
+                style={{ width: 24, height: 24 }}
+                source={require("../assets/icon/speaker.png")}
               />
             </TouchableOpacity>
+            <Text style={styles.meaning}>{meaning}</Text>
           </View>
-          <View>
-            <Image style={styles.mainImage} source={{ uri: image }} />
-          </View>
-        </View>
-        <View style={styles.rightColumn}>
-          <Text style={styles.word}>{word}</Text>
-          <Text style={styles.spelling}>{spelling}</Text>
-          <TouchableOpacity
-            style={styles.iconSpeaker}
-            onPress={this.props.playSound}
-          >
-            <Image
-              style={{ width: 24, height: 24 }}
-              source={require("../assets/icon/speaker.png")}
-            />
-          </TouchableOpacity>
-          <Text style={styles.meaning}>{meaning}</Text>
-        </View>
-      </View>
+        {/* </View> */}
+      </TouchableOpacity>
     );
   }
 }
@@ -130,7 +132,7 @@ export default DetailTopicItem;
 const styles = StyleSheet.create({
   container: {
     margin: 0,
-    marginBottom: 10,
+    marginBottom: 5,
     backgroundColor: "#fff",
     padding: 10,
     flexDirection: "row",
